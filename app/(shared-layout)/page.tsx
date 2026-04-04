@@ -4,7 +4,7 @@ export default function Home() {
    <div>
      <h1 className="text-4xl font-bold">Welcome to My App</h1>
      <p className="text-lg">This is the home page of my Next.js application.</p>
-     <Link href="/blogs">Go to Blogs</Link>
+     <Link href="/blog">Go to Blog</Link>
    </div>
   );
 }
