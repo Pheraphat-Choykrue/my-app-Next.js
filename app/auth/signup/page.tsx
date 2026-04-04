@@ -18,6 +18,11 @@ export default function SignUpPage() {
       password: ""
     }
   });
+
+  function onSubmit(data: any) {
+    console.log(data);
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -25,12 +30,12 @@ export default function SignUpPage() {
         <CardDescription>Create an account to get started</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
-            <FieldGroup>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FieldGroup className="gap-y-4">
               <Controller name="name" control={form.control} render={({field, fieldState})=>{
                 return <Field>
                   <FieldLabel>Name</FieldLabel>
-                  <Input placeholder="Enter your name" {...form} />
+                  <Input aria-invalid={fieldState.invalid} placeholder="Enter your name" {...form} />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]}/>
                   )}
@@ -39,7 +44,7 @@ export default function SignUpPage() {
               <Controller name="email" control={form.control} render={({field, fieldState})=>{
                 return <Field>
                   <FieldLabel>Email</FieldLabel>
-                  <Input placeholder="Enter your email" {...form} type="email" />
+                  <Input aria-invalid={fieldState.invalid} placeholder="Enter your email" {...form} type="email" />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]}/>
                   )}
@@ -48,7 +53,7 @@ export default function SignUpPage() {
               <Controller name="password" control={form.control} render={({field, fieldState})=>{
                 return <Field>
                   <FieldLabel>Password</FieldLabel>
-                  <Input placeholder="********" {...form} type="password" />
+                  <Input aria-invalid={fieldState.invalid} placeholder="********" {...form} type="password" />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]}/>
                   )}
