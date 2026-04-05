@@ -35,7 +35,7 @@ export default function SignUpPage() {
               <Controller name="name" control={form.control} render={({field, fieldState})=>{
                 return <Field>
                   <FieldLabel>Name</FieldLabel>
-                  <Input aria-invalid={fieldState.invalid} placeholder="Enter your name" {...form} />
+                  <Input aria-invalid={fieldState.invalid} placeholder="Enter your name" {...field} />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]}/>
                   )}
@@ -44,7 +44,7 @@ export default function SignUpPage() {
               <Controller name="email" control={form.control} render={({field, fieldState})=>{
                 return <Field>
                   <FieldLabel>Email</FieldLabel>
-                  <Input aria-invalid={fieldState.invalid} placeholder="Enter your email" {...form} type="email" />
+                  <Input aria-invalid={fieldState.invalid} placeholder="Enter your email" {...field} type="email" />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]}/>
                   )}
@@ -53,7 +53,7 @@ export default function SignUpPage() {
               <Controller name="password" control={form.control} render={({field, fieldState})=>{
                 return <Field>
                   <FieldLabel>Password</FieldLabel>
-                  <Input aria-invalid={fieldState.invalid} placeholder="********" {...form} type="password" />
+                  <Input aria-invalid={fieldState.invalid} placeholder="********" {...field} type="password" />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]}/>
                   )}
