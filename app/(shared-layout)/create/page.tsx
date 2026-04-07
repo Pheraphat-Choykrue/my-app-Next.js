@@ -1,5 +1,6 @@
 "use client";
 
+import { createPost } from "@/app/actions";
 import { BlogSchema } from "@/app/schemas/blog";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -8,21 +9,25 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
+import z from "zod";
 
 export default function CreatePage({}) {
     const [isPending, startTransition] = useTransition()
-    const router = useRouter();
     const form = useForm({
         resolver: zodResolver(BlogSchema),
         defaultValues: {
           title: "",
           content: ""
         }
-      });
+    });
 
+    function onSubmit (values: z.infer<typeof BlogSchema>) {
+        startTransition(async()=>{
+            await createPost(values);
+        })
+    }
     return (
     <div className="py-12">
         <div className="text-center mb-12">
@@ -36,7 +41,7 @@ export default function CreatePage({}) {
                 <CardDescription>Fill out the form below to create new content.</CardDescription>
             </CardHeader>
             <CardContent>
-                <form className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)}>
                     <FieldGroup className="gap-y-4">
                         <Controller name="title" control={form.control} render={({field, fieldState})=>{
                             return <Field>

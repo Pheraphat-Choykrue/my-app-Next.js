@@ -1,8 +1,14 @@
+"use client"
+
+import { api } from "@/convex/_generated/api"
+import { useQuery } from "convex/react"
+
 export default function blogPage() {
-    return (
+    const data = useQuery(api.post.getPosts, {});
+    return ( 
         <div>
             <h1 className="text-2xl font-bold">Blog Page</h1>
-            <p>Welcome to the blog page! Here you can find all the latest articles and updates.</p>
+            <p>{data?.[0].title}</p>
         </div>
     )
 }
